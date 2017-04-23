@@ -255,18 +255,17 @@ var zhuanyou = {
                 clearInterval(self.counteId);
                 self.counteId = null;
                 //判断盈利比例
-                this.$store.commit('commitIncome', this.income);
-                // this.$store.commit('commitIncome', 20);
+                // this.$store.commit('commitIncome', this.income);
                 if (localStorage.getItem('times')) {
                     localStorage.setItem('times', parseInt(localStorage.getItem('times')) + 1);
-                    if (this.income > parseFloat(localStorage.getItem('income'))) {
-                        localStorage.setItem('income', this.income);
+                    if (self.income > parseFloat(localStorage.getItem('income'))) {
+                        localStorage.setItem('income', self.income);
                     }
                 } else {
                     localStorage.setItem('times', 1);
-                    localStorage.setItem('income', this.income);
+                    localStorage.setItem('income', self.income);
                 }
-                this.$emit("changepanel", "over", true);
+                // this.$emit("changepanel", "over", true);
 
             } else if (self.index == 6) {
                 clearInterval(self.counteId);
