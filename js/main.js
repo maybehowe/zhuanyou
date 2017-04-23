@@ -45,6 +45,10 @@ var zhuanyou = {
             self.beginGame();
         });
 
+        $('.game_close').on('touchstart', function () {
+          self.closeGame();
+        });
+
         $('.getin_btn').on('touchstart', function() {
             if (!$(this).hasClass('unable')) {
                 self.getIn();
@@ -80,7 +84,20 @@ var zhuanyou = {
     },
     //关闭游戏
     closeGame: function() {
+        var self = this;
         $('.game').hide();
+        $('.zichan').html('10000');
+        $('.shouyi').html('0.00%');
+        $('.cangwei').html('持仓');
+        self.shengyu = kdata.length;
+        self.index = 0;
+        $('.fang').html('');
+        self.closeTip();
+        self.hideCircle();
+        clearInterval(self.counteId);
+        self.counteId = null;
+        self.unbaleGetout();
+        self.unableGetin();
     },
     //买入
     getIn: function() {
