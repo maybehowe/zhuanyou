@@ -1,0 +1,158 @@
+html,body, div, span, form,iframe,
+h1, h2, h3, h4, h5, p, em, img, ol, ul, li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+html{font-size: 62.5%;}
+body {
+  font-family: Helvetica, 'STXihei', 'STHeiti Light', 'Microsoft yahei', sans-serif;
+  line-height: 1;
+  background-color: #fff;
+  overflow: hidden;
+}
+html,body{
+  height: 100%;
+  width: 100%;
+}
+
+input {
+  margin: 0;
+  padding: 0;
+  /*-webkit-appearance: none;*/
+  border-style: none;
+}
+
+input {
+  outline-style: none;
+}
+
+input[type="text"] {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+ol,
+ul,
+li {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input::-webkit-input-placeholder {
+color: #D6D0CA !important;
+}
+input:-moz-placeholder {
+color: #D6D0CA !important;
+}
+input::-moz-placeholder {
+color: #D6D0CA !important;
+}
+input:-ms-input-placeholder {
+color: #D6D0CA !important;
+}
+textarea::-webkit-input-placeholder {
+color: #000 !important;
+}
+textarea:-moz-placeholder {
+color: #000 !important;
+}
+textarea::-moz-placeholder {
+color: #000 !important;
+}
+textarea:-ms-input-placeholder {
+color: #000 !important;
+}
+/*
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #555555;
+}*/
+a {
+  display: block;
+  text-decoration: none;
+}
+.clear {
+  clear: both;
+}
+.clearfix:after {
+  content: "\0020";
+  height: 0;
+  display: block;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  *zoom: 1;
+}
+
+.floatl {
+  float: left;
+}
+
+.floatr {
+  float: right;
+}
+
+.shadow {
+  -webkit-box-shadow: 1px 0px 3px #d9dbdd;
+     -moz-box-shadow: 0px 1px 3px #d9dbdd;
+          box-shadow: 0px 1px 3px #d9dbdd;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+.display-flexbox {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.flexbox-children {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
