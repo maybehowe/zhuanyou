@@ -10,7 +10,7 @@ var ks = [
     false, false, false, false, false, false, false, false, false, false
 ];
 
-var zhuanyou = {
+var game = {
     tradeMode: 0, //0未交易  1做空   2做多
     counteId: null,
     index: 0,
@@ -27,6 +27,8 @@ var zhuanyou = {
     },
     bindEvent: function() {
         var self = this;
+        var $over = $('.over'),
+            $share = $('.shareto');
         $('.game_rule_wrap').on('touchmove', function(e) {
             // alert();
             // e.stopPropagation()
@@ -35,6 +37,10 @@ var zhuanyou = {
         $('.game_rule').on('touchstart', function() {
             self.showGameRule();
         });
+
+        $('.game_share').on('touchstart', function () {
+            over.showShare();
+        })
 
         $('.rule_close').on('touchstart', function() {
             self.hideGameRule();
@@ -45,8 +51,8 @@ var zhuanyou = {
             self.beginGame();
         });
 
-        $('.game_close').on('touchstart', function () {
-          self.closeGame();
+        $('.game_close').on('touchstart', function() {
+            self.closeGame();
         });
 
         $('.getin_btn').on('touchstart', function() {
@@ -63,6 +69,20 @@ var zhuanyou = {
 
         $('.goon_btn').on('touchstart', function() {
             self.operationSelf();
+        });
+
+        $over.on('touchstart', '.err_cancel', function() {
+
+          over.closeShowErr();
+        });
+        $over.on('touchstart', '.err_share_btn', function() {
+          over.closeShowErr();
+          over.showShare();
+        });
+
+        $share.on('touchstart', '.close_share', function() {
+
+          over.closeShare();
         })
     },
     //显示游戏规则
@@ -79,8 +99,19 @@ var zhuanyou = {
     //开始游戏
     beginGame: function() {
         var self = this;
-        $('.game').show();
-        self.startCount();
+        if (!localStorage.getItem("times") || localStorage.getItem("times") <= 3) {
+            $('.game').show();
+            self.startCount();
+            // _gaq.push(['_trackEvent', 'game', 'start', 'content', 1, true]);
+        } else {
+            over.showErr();
+        }
+
+    },
+    replayGame: function() {
+        var self = this;
+        self.closeGame();
+        $('.game').hide();
     },
     //关闭游戏
     closeGame: function() {
@@ -89,15 +120,26 @@ var zhuanyou = {
         $('.zichan').html('10000');
         $('.shouyi').html('0.00%');
         $('.cangwei').html('持仓');
-        self.shengyu = kdata.length;
-        self.index = 0;
+        $('.sheng_k').html('80');
+
         $('.fang').html('');
         self.closeTip();
         self.hideCircle();
         clearInterval(self.counteId);
+        $('.getin_btn').addClass('btn unable');
+        $('.getout_btn').addClass('btn unable');
+
+        self.shengyu = kdata.length;
+        self.index = 0;
+        self.isTrain = true;
+        self.tradeMode = 0;
         self.counteId = null;
-        self.unbaleGetout();
-        self.unableGetin();
+        self.asset = 100000.0;
+        self.coinShow = false;
+        self.buyPrice = 0;
+        self.hand = 0;
+        self.income = 0.0;
+        self.isTrain = true;
     },
     //买入
     getIn: function() {
@@ -282,7 +324,8 @@ var zhuanyou = {
                     localStorage.setItem('times', 1);
                     localStorage.setItem('income', self.income);
                 }
-                // this.$emit("changepanel", "over", true);
+                over.init(20);
+                // over.init(self.income);
 
             } else if (self.index == 6) {
                 clearInterval(self.counteId);
@@ -317,7 +360,7 @@ var zhuanyou = {
                 self.counteId = null;
                 self.alertTip("continue");
             }
-        }, 500)
+        }, 100)
     },
     operationSelf() {
         var self = this;
@@ -334,4 +377,4 @@ var zhuanyou = {
     }
 };
 
-zhuanyou.init();
+game.init();

@@ -15,7 +15,8 @@ body {
     z-index: 100;
     background-size: cover;
 }
-.landscape_tip .content{
+
+.landscape_tip .content {
     font-size: 30px;
     color: #735c5d;
     text-align: center;
@@ -251,12 +252,13 @@ table th {
     height: 220px;
     width: 356px;
     background: #fff;
-    color:#857c7b;
+    color: #857c7b;
     border-radius: 6px;
     border: 2px #ed4d4a solid;
 }
-.game_chart p{
-  font-size: 14px;
+
+.game_chart p {
+    font-size: 14px;
     word-break: break-all;
 }
 
@@ -267,9 +269,9 @@ table th {
 .game_info_item {
     float: left;
     height: 28px;
-    width: 95px;
+    width: 100px;
     padding-left: 10px;
-    margin-right: 20px;
+    margin-right: 12px;
     line-height: 28px;
     font-size: 12px;
     color: #545454;
@@ -414,4 +416,254 @@ table th {
     border: none;
     -webkit-animation: shank 1s ease infinite;
     animation: shank 1s ease infinite;
+}
+
+.over,.shareto,.prize {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 104;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.over #content{
+    background: #fff;
+    font-size: 14px;
+    -ms-flex-item-align: center;
+    -ms-grid-row-align: center;
+    align-self: center;
+    padding: 20px 30px 10px 30px;
+    border-radius: 4px;
+}
+
+.over .item {
+    background: #fff5f4;
+    border-radius: 4px;
+    padding: 10px 30px;
+    margin-bottom: 12px;
+    color: #545454;
+}
+
+.red {
+    color: #f8525c;
+}
+
+.over .item span {
+    display: inline-block;
+    margin: 0 18px;
+}
+
+.over .item span b {
+    font-weight: normal;
+}
+
+.over p {
+    position: relative;
+    top: -6px;
+    right: -50px;
+    color: #999;
+    font-size: 12px;
+}
+
+.over .opt {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    padding: 0;
+    padding-top: 10px;
+}
+
+.over .share {
+    font-size: 12px;
+    margin-top: 16px;
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+    color: #5899ff;
+    float: right;
+}
+
+.alert_btn {
+    font-size: 15px;
+    background: #ededed;
+    border-radius: 20px;
+    color: #fff;
+    padding: 6px 24px;
+}
+
+.again_btn {
+    background: #ff5c67;
+}
+
+.other_btn {
+    background: #47b171;
+}
+
+
+.over #content.err_wrap{
+  background: #fff url(../img/tip_bg.png) left bottom no-repeat;
+  background-size: 221px 134px;
+}
+
+.err_txt {
+    height: 50px;
+    line-height: 20px;
+    padding-left: 55px;
+    background: url(../img/face.png) left center no-repeat;
+    background-size: 45px 45px;
+    color: #333333;
+    padding-top: 10px;
+}
+
+.err_ctrl {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    padding: 0;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+.err_ctrl_btn{
+  height: 30px;
+  line-height: 30px;
+  border-radius: 15px;
+  width: 140px;
+  text-align: center;
+  color: #fefefe;
+}
+.err_share_btn{
+  background: #4ab575;
+}
+.err_cancel{
+  background: #5c9dff;
+}
+.shareto img,.prize img{
+  display: block;
+  width: 100%;
+}
+.shareto #content, .prize #content{
+    font-size: 14px;
+    -ms-flex-item-align: center;
+    -ms-grid-row-align: center;
+    align-self: center;
+    /*padding: 20px 30px 10px 30px;*/
+    /*border-radius: 4px;*/
+    width: 65%;
+    position: relative;
+}
+.share_txt, .prize_txt{
+      color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 10px;
+    padding-left: 40px;
+    margin-left: 60px;
+    background: url(../img/gantan.png) left center no-repeat;
+    background-size: 25px 25px;
+}
+.prize_txt{
+  margin-left:16px;
+}
+.close_share, .close_prize{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: -15px;
+  right: -15px;
+  background: url(../img/rule_close.png) no-repeat;
+  background-size: 30px 30px;
+}
+.phone{
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 104;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.phone .phone_content{
+  font-size: 14px;
+    -ms-flex-item-align: center;
+    -ms-grid-row-align: center;
+    align-self: center;
+    padding: 20px 40px 10px 40px;
+    border-radius: 4px;
+    width: 40%;
+    position: relative;
+    background: #fff url(../img/tip_bg.png) left bottom no-repeat;
+  background-size: 221px 134px;
+}
+
+.phone_form_item{
+  border:1px #e8e1d9 solid;
+  height: 34px;
+  line-height: 34px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  padding-left: 10px;
+}
+.phone_form_item input{
+  border:0;
+  outline: 0;
+  height: 32px;
+  line-height: 32px;
+  width: 100%;
+  font-size: 14px;
+}
+.phone_form_item input.code_num{
+  width: 60%;
+}
+.phone_form_item .code_btn{
+  float: right;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    padding: 0 16px;
+    background: #5697fd;
+    border-radius: 10px;
+    margin-top: 8px;
+    color: #fff;
+    margin-right: 8px;
+}
+.phone_submit{
+  width: 130px;
+    margin: 28px auto;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    background: #f84f59;
+    color: #fff;
+    border-radius: 15px;
+}
+.close_phone{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: -15px;
+  right: -15px;
+  background: url(../img/rule_close.png) no-repeat;
+  background-size: 30px 30px;
+}
+
+.hidden {
+    display: none;
 }
