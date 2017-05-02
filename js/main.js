@@ -330,8 +330,8 @@ var game = {
                     localStorage.setItem('income', self.income);
                 }
                 //Todo 为了出现注册
-                over.init(20);
-                // over.init(self.income);
+                // over.init(20);
+                over.init(self.income);
 
             } else if (self.index == 6) {
                 clearInterval(self.counteId);
@@ -366,7 +366,7 @@ var game = {
                 self.counteId = null;
                 self.alertTip("continue");
             }
-        }, 100)
+        }, 1300)
     },
     operationSelf() {
         var self = this;
