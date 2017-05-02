@@ -715,7 +715,7 @@ table th {
     display: none;
 }
 
-@media only screen and (min-device-width: 320px) {
+@media only screen and (min-device-width: 320px) and (orientation : portrait){
     .game_content {
         position: absolute;
         height: 500px;
@@ -851,7 +851,7 @@ table th {
         top: -94px;
     }
 }
-@media only screen and (min-device-width: 375px)  {
+@media only screen and (min-device-width: 375px) and (orientation : portrait) {
     .game_begin_btn {
         bottom: 40px;
     }
