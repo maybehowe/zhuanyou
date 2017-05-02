@@ -1,4 +1,5 @@
 var over = {
+    activityPeriods:'20170411',
     showHistory: false,
     history: 0.0,
     buttonMsg: '',
@@ -10,7 +11,7 @@ var over = {
         self.curIncome = curIncome;
         self.bindEvent();
         self.mounted();
-        self.showAlert();
+        //self.showAlert();
     },
     bindEvent: function() {
         var self = this;
@@ -43,6 +44,7 @@ var over = {
                 window.location.href = "http://pmchat.24k.hk/studio";
             }
             // this.$store.commit('commitIncome', 0);
+            return false;
         });
 
         $over.on('touchstart', '.share', function() {
@@ -51,13 +53,52 @@ var over = {
 
         //手机号提交
         $phone.on('touchstart', '.phone_submit', function () {
-          var type = 1;
-          self.showPrize(1);
+            var url = 'http://testgwactivity.24k.hk:8098/unify-activity/activity/earnmoney/lottery',
+                //url = '/api/yx/activity/earnmoney/lottery',
+                url = './activity/earnmoney/lottery',
+                phone = $.trim($('.phone_form .phone_num').val()),
+                captcha = $.trim($('.phone_form .code_num').val()),
+                status = '3',
+                post = {activityPeriods:over.activityPeriods, status:status, phone:phone, captcha:captcha};
+            $.post(url, post, function(res){
+                if(res.ok && res.data.prize){
+                    var type = res.data.prizeCode == 'CASH5YUAN' ? 1 : 2;
+                    localStorage.setItem('phone', phone);
+                    over.showPrize(type);
+                }
+            });
+            return false;
         });
 
         // 发送验证码
         $phone.on('touchstart', '.code_btn', function () {
+            var url = 'http://testgwactivity.24k.hk:8098/unify-activity/activity/sms/vericode',
+                // url = '/api/yx/activity/sms/vericode',
+                url = './activity/sms/vericode',
+                phone = $.trim($('.phone_form .phone_num').val());
+            if(phone == '' || $('.code_btn').attr('data-send') == '1'){
+                return false;
+            }
 
+            $('.code_btn').attr('data-send', '1');
+            $.post(url, {mobile:phone}, function(res){
+                if(res.ok){
+                    var timeDiff = 60,
+                        sendCodeInterval = setInterval(function(){
+                            if(timeDiff < 1){
+                                $('.code_btn').html('验证码').css('background', '#5697fd');
+                                clearInterval(sendCodeInterval);
+                                $('.code_btn').attr('data-send', '0');
+                            }else{
+                                $('.code_btn').html('已发送('+timeDiff+'s)').css('background','#666');
+                                timeDiff--;
+                            }
+                        }, 1000);
+                }else{
+                    $('.code_btn').attr('data-send', '0');
+                }
+            });
+            return false;
         });
 
         //关闭手机号提交
@@ -75,31 +116,7 @@ var over = {
     mounted: function() {
         var self = this;
         var curIncome = self.curIncome;
-        if (!localStorage.getItem('times') || localStorage.getItem('times') == "1") {
-            self.showHistory = false;
-        } else {
-            self.showHistory = true;
-            if (localStorage.getItem('phone')) {
-                //联网获取
-                $.ajax({
-                        url: '',
-                    })
-                    // axios.post('/activity/earnmoney/maxYield', {
-                    //   activityPeriods: '20170411',
-                    //   phone: localStorage.getItem('phone')
-                    // }).then((res) => {
-                    //   let response = JSON.parse(res);
-                    //   if (response.code == '0') {
-                    //     this.history = response.data.maxYield;
-                    //   }
-                    // }).catch((res) => {
-                    //   console.log(res);
-                    // });
-            } else {
-                //使用本地
-                self.history = parseFloat(localStorage.getItem('income'));
-            }
-        }
+
         if (!localStorage.getItem("totalTimes")) {
             localStorage.setItem("totalTimes", 1);
         } else {
@@ -112,6 +129,30 @@ var over = {
             self.redAlert = true;
             self.buttonMsg = '去直播间课堂';
         }
+
+        if (!localStorage.getItem('times') || localStorage.getItem('times') == "1") {
+            self.showHistory = false;
+            self.showAlert();
+        } else {
+            self.showHistory = true;
+            if (localStorage.getItem('phone')) {
+                //var url = '/api/yx/activity/earnmoney/maxYield',
+                var url = './activity/earnmoney/maxYield',
+                    phone = localStorage.getItem('phone'),
+                    post = {activityPeriods: over.activityPeriods, phone:phone};
+                $.post(url, post, function(res){
+                    if(res.ok){
+                        self.history = res.data.maxYield;
+                        self.showAlert();
+                    }
+                });
+            } else {
+                //使用本地
+                self.history = parseFloat(localStorage.getItem('income'));
+                self.showAlert();
+            }
+        }
+
     },
     showAlert: function() {
         var self = this;
@@ -146,7 +187,7 @@ var over = {
     },
     showPhone: function () {
       var self = this;
-        var html = '<div class="phone_content"> <div class="close_phone"></div> <div class="phone_form"> <div class="phone_form_item"> <input class="phone_num" type="text" maxlength="11" placeholder="请输入手机号码"> </div> <div class="phone_form_item"> <input class="code_num" type="text" maxlength="6" placeholder="请输入验证码"> <div class="code_btn">验证码</div> </div> </div> <div class="phone_submit">提交</div> </div>';
+        var html = '<div class="phone_content"> <div class="close_phone"></div> <div class="phone_form"> <div class="phone_form_item"> <input class="phone_num" type="text" name="mobile" maxlength="11" placeholder="请输入手机号码"> </div> <div class="phone_form_item"> <input class="code_num" type="text" name="captcha" maxlength="6" placeholder="请输入验证码"> <div class="code_btn">验证码</div> </div> </div> <div class="phone_submit">提交</div> </div>';
 
         $('.phone').append(html).removeClass('hidden');
     },
@@ -168,7 +209,7 @@ var over = {
     },
     showShare: function () {
       var self = this;
-      var html = '<div id="content"> <div class="close_share"></div> <img src="./img/share_img.png" alt=""> <div class="share_txt"> 长按上方图片保存到您的手机相册中。请打开微信将该<br>图片发送给好友，或者分享朋友圈，即分享成功啦！ </div> </div>';
+      var html = '<div id="content"> <div class="close_share"></div> <img src="./img/share_img.png" alt=""> <span class="share_txt"> 长按上方图片保存到您的手机相册中。请打开微信将该<br>图片发送给好友，或者分享朋友圈，即分享成功啦！ </span> </div>';
 
       $('.shareto').append(html).removeClass('hidden');
       if (localStorage.getItem("times") && localStorage.getItem("times") > 3) {
@@ -184,7 +225,7 @@ var over = {
     },
     addShare: function() {
       var phone = localStorage.getItem('phone') || '';
-      axios.post('/activity/earnmoney/addShareCount', {
+      axios.post('./activity/earnmoney/addShareCount', {
         activityPeriods: '20170411',
         phone: phone
       }).then((res) => {

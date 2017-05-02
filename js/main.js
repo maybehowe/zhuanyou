@@ -89,7 +89,7 @@ var game = {
     showGameRule: function() {
         var rule_html = '<div class="item"> <h3 style="color:#f00; text-align:center;">活动规则</h3> </div> <div class="item"> <span>活动时间:</span>待定 </div> <div class="item"> <span>参与条件:</span>所有客户 （现有客户可参与游戏，但不获得对应奖励） </div> <div class="item"> <span>交易有效期:</span>30个自然日 </div> <table> <tr> <th>奖励标准</th> <th>奖励</th> <th>获奖须知</th> </tr> <tr> <td>收益率10%以下</td> <td>加入培训课程机会</td> <td>--</td> </tr> <tr> <td>收益率10%以上</td> <td>微信红包</td> <td>添加专属客户经理</td> </tr> </table> <div class="item"> <span>规则说明:</span> <p>1. 每一个注册新用户ID仅能参与领取一次奖金，不能重复领取。</p> <p>2. 赚钱小游戏奖励只适用于金道贵金属的新注册用户，且从未属开立过真实交易账户的用户。在活动期间收益率在15%以上需添加专属客户经理的微信，在致电核实身份后进行发放。</p> <p>3. 每个用户每天最多只能参与三局游戏机会，当参与机会达到上限时通过分享一次即可增加 “再挑战一次机会”的参与机会。</p> <p>4. 当游戏结束之后,领奖方式按当前游戏收益率为领奖依据。</p> <p>5. 赚钱小游戏中的现有客户即可参与，老用户不享有此游戏红包奖励，但有获得直播间VIP特权一个月体验机会（可累计叠加）。</p> <p>6. 金道贵金属保留随时修订、暂停、终止本活动及任何相关规则条款之权利及其解释权。</p> <p>7. 红包每天限量500份</p> <p>8. 一经发现任何违规套取返利的行为，将不予返利、追回相关余额或者封停账号，且依法追究其法律责任。</p> </div>';
 
-        $('.game_rule_content').html(rule_html);
+        $('.game_rule_content_in').html(rule_html);
         $('.game_rule_wrap').show();
     },
     //隐藏游戏规则
@@ -106,6 +106,7 @@ var game = {
         } else {
             over.showErr();
         }
+        $('.cangwei').html('空仓');
 
     },
     replayGame: function() {
@@ -274,20 +275,24 @@ var game = {
     //显示圆圈提示
     showCircle: function(type) {
         var self = this;
-        var circlePos = [{
-            left: 20.5 + '%',
-            top: 49.5 + '%'
-        }, {
-            left: 29.5 + '%',
-            top: 43.2 + '%'
-        }, {
-            left: 31 + '%',
-            top: 43.1 + '%'
-        }, {
-            left: 38.2 + '%',
-            top: 45.4 + '%'
-        }];
-        $('.circle').css(circlePos[type]).show();
+        // console.log('type ',type);
+        // var circlePos = [{
+        //     left: 20.5 + '%',
+        //     top: 49.5 + '%'
+        // }, {
+        //     left: 29.5 + '%',
+        //     top: 43.2 + '%'
+        // }, {
+        //     left: 31 + '%',
+        //     top: 43.1 + '%'
+        // }, {
+        //     left: 38.2 + '%',
+        //     top: 45.4 + '%'
+        // }];
+        // $('.circle').css(circlePos[type]).show();
+        var remove_class = type > 0 ?'circle_' + (type - 1) : 'circle_3';
+
+        $('.circle').removeClass(remove_class).addClass('circle_' + type).show();
     },
     //关闭圆圈提示
     hideCircle: function() {
@@ -324,8 +329,9 @@ var game = {
                     localStorage.setItem('times', 1);
                     localStorage.setItem('income', self.income);
                 }
-                over.init(20);
-                // over.init(self.income);
+                //Todo 为了出现注册
+                // over.init(20);
+                over.init(self.income);
 
             } else if (self.index == 6) {
                 clearInterval(self.counteId);
@@ -360,7 +366,7 @@ var game = {
                 self.counteId = null;
                 self.alertTip("continue");
             }
-        }, 100)
+        }, 1300)
     },
     operationSelf() {
         var self = this;

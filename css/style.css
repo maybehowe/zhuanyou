@@ -25,6 +25,8 @@ body {
     bottom: 120px;
 }
 
+
+/*
 @media all and (orientation: landscape) {
     body {
         background: #fff;
@@ -48,6 +50,7 @@ body {
         display: none;
     }
 }
+*/
 
 .main {
     width: 100%;
@@ -147,8 +150,9 @@ body {
 }
 
 .game_rule_content .item {
-    margin: 10px;
+    margin: 20px;
     font-size: 14px;
+    line-height: 20px;
 }
 
 .game_rule_content table {
@@ -180,8 +184,10 @@ table th {
 
 .rule_close {
     position: absolute;
-    top: 30px;
-    right: 30px;
+    /*top: calc(50% - 155px);
+    right: calc(50% - 265px);*/
+    top: 0;
+    right: 0;
     width: 28px;
     height: 28px;
     z-index: 102;
@@ -241,7 +247,7 @@ table th {
     background: url(../img/alert_bg.png) center center no-repeat;
     background-size: cover;
     top: -100px;
-    left: -35px;
+    left: -28px;
 }
 
 .game_chart {
@@ -418,7 +424,9 @@ table th {
     animation: shank 1s ease infinite;
 }
 
-.over,.shareto,.prize {
+.over,
+.shareto,
+.prize {
     position: fixed;
     top: 0;
     left: 0;
@@ -434,7 +442,7 @@ table th {
     justify-content: center;
 }
 
-.over #content{
+.over #content {
     background: #fff;
     font-size: 14px;
     -ms-flex-item-align: center;
@@ -509,10 +517,9 @@ table th {
     background: #47b171;
 }
 
-
-.over #content.err_wrap{
-  background: #fff url(../img/tip_bg.png) left bottom no-repeat;
-  background-size: 221px 134px;
+.over #content.err_wrap {
+    background: #fff url(../img/tip_bg.png) left bottom no-repeat;
+    background-size: 221px 134px;
 }
 
 .err_txt {
@@ -535,25 +542,32 @@ table th {
     padding-top: 20px;
     padding-bottom: 30px;
 }
-.err_ctrl_btn{
-  height: 30px;
-  line-height: 30px;
-  border-radius: 15px;
-  width: 140px;
-  text-align: center;
-  color: #fefefe;
+
+.err_ctrl_btn {
+    height: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    width: 140px;
+    text-align: center;
+    color: #fefefe;
 }
-.err_share_btn{
-  background: #4ab575;
+
+.err_share_btn {
+    background: #4ab575;
 }
-.err_cancel{
-  background: #5c9dff;
+
+.err_cancel {
+    background: #5c9dff;
 }
-.shareto img,.prize img{
-  display: block;
-  width: 100%;
+
+.shareto img,
+.prize img {
+    display: block;
+    width: 100%;
 }
-.shareto #content, .prize #content{
+
+.shareto #content,
+.prize #content {
     font-size: 14px;
     -ms-flex-item-align: center;
     -ms-grid-row-align: center;
@@ -563,30 +577,37 @@ table th {
     width: 65%;
     position: relative;
 }
-.share_txt, .prize_txt{
-      color: #fff;
+
+.share_txt,
+.prize_txt {
+    display: inline-block;
+    text-align: center;
+    color: #fff;
     font-size: 12px;
-    line-height: 20px;
-    margin-top: 10px;
+    line-height: 18px;
+    margin-top: 6px;
     padding-left: 40px;
-    margin-left: 60px;
-    background: url(../img/gantan.png) left center no-repeat;
+    background: url(../img/gantan.png) 5px center no-repeat;
     background-size: 25px 25px;
 }
-.prize_txt{
-  margin-left:16px;
+
+.prize_txt {
+    margin-left: 16px;
 }
-.close_share, .close_prize{
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  top: -15px;
-  right: -15px;
-  background: url(../img/rule_close.png) no-repeat;
-  background-size: 30px 30px;
+
+.close_share,
+.close_prize {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -15px;
+    right: -15px;
+    background: url(../img/close.png) no-repeat;
+    background-size: 30px 30px;
 }
-.phone{
-  position: fixed;
+
+.phone {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -600,8 +621,9 @@ table th {
     -ms-flex-pack: center;
     justify-content: center;
 }
-.phone .phone_content{
-  font-size: 14px;
+
+.phone .phone_content {
+    font-size: 14px;
     -ms-flex-item-align: center;
     -ms-grid-row-align: center;
     align-self: center;
@@ -610,30 +632,33 @@ table th {
     width: 40%;
     position: relative;
     background: #fff url(../img/tip_bg.png) left bottom no-repeat;
-  background-size: 221px 134px;
+    background-size: 221px 134px;
 }
 
-.phone_form_item{
-  border:1px #e8e1d9 solid;
-  height: 34px;
-  line-height: 34px;
-  margin-bottom: 10px;
-  border-radius: 3px;
-  padding-left: 10px;
+.phone_form_item {
+    border: 1px #e8e1d9 solid;
+    height: 34px;
+    line-height: 34px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    padding-left: 10px;
 }
-.phone_form_item input{
-  border:0;
-  outline: 0;
-  height: 32px;
-  line-height: 32px;
-  width: 100%;
-  font-size: 14px;
+
+.phone_form_item input {
+    border: 0;
+    outline: 0;
+    height: 32px;
+    line-height: 32px;
+    width: 100%;
+    font-size: 14px;
 }
-.phone_form_item input.code_num{
-  width: 60%;
+
+.phone_form_item input.code_num {
+    width: 55%;
 }
-.phone_form_item .code_btn{
-  float: right;
+
+.phone_form_item .code_btn {
+    float: right;
     height: 20px;
     line-height: 20px;
     font-size: 12px;
@@ -644,8 +669,9 @@ table th {
     color: #fff;
     margin-right: 8px;
 }
-.phone_submit{
-  width: 130px;
+
+.phone_submit {
+    width: 130px;
     margin: 28px auto;
     text-align: center;
     height: 30px;
@@ -654,16 +680,160 @@ table th {
     color: #fff;
     border-radius: 15px;
 }
-.close_phone{
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  top: -15px;
-  right: -15px;
-  background: url(../img/rule_close.png) no-repeat;
-  background-size: 30px 30px;
+
+.close_phone {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -15px;
+    right: -15px;
+    background: url(../img/rule_close.png) no-repeat;
+    background-size: 30px 30px;
+}
+
+.circle_0 {
+    left: 20.5%;
+    top: 49.5%;
+}
+
+.circle_1 {
+    left: 29.5%;
+    top: 43.2%;
+}
+
+.circle_2 {
+    left: 31%;
+    top: 43.1%;
+}
+
+.circle_3 {
+    left: 38.2%;
+    top: 45.4%;
 }
 
 .hidden {
     display: none;
+}
+
+@media all and (orientation: portrait) {
+    .game_begin_btn {
+        bottom: 40px;
+    }
+    .game_content {
+        position: absolute;
+        height: 500px;
+        width: 360px;
+        top: 50%;
+        left: 50%;
+        margin-left: -190px;
+        margin-top: -250px;
+        background: url(../img/game_bg_1.png) left center no-repeat;
+        background-size: auto 500px;
+        border-radius: 10px;
+    }
+    .game_close {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 10px;
+        right: -15px;
+        background: url(../img/close.png) center center no-repeat;
+        background-size: cover;
+    }
+    .cow_tip {
+        position: absolute;
+        left: 122px;
+        bottom: 2px;
+        width: 75px;
+        height: 113px;
+        background: url(../img/cow.png) center center no-repeat;
+        background-size: cover;
+    }
+    .cow_tip .tip {
+        top: -94px;
+    }
+    .game_chart {
+        position: absolute;
+        right: 8px;
+        top: 38px;
+        padding: 10px;
+        height: 222px;
+        width: 300px;
+        background: #fff;
+        color: #857c7b;
+        border-radius: 6px;
+        border: 2px #ed4d4a solid;
+        overflow: hidden;
+    }
+    .game_left_ul li {
+        height: 15.5px;
+    }
+    .game_info_item {
+        padding-left: 6px;
+    }
+    .game_info_zichan {
+        width: 88px;
+    }
+    .game_info_shouyi {
+        /*width:*/
+    }
+    .game_info_cangwei {
+        width: 70px
+    }
+    .game_info_item span.cangwei {
+        margin-left: 2px;
+    }
+    .game_chart_content {
+        height: 62%;
+    }
+    .game_chart_ctrl {
+        float: left;
+    }
+    .game_btn {
+        width: 66px;
+    }
+    .circle_0 {
+        left: 20.5%;
+        top: 47.5%;
+    }
+    .circle_1 {
+        left: 29%;
+        top: 41.2%;
+    }
+    .circle_2 {
+        left: 30%;
+        top: 40.1%;
+    }
+    .circle_3 {
+        left: 37.2%;
+        top: 43.4%;
+    }
+    .shareto #content,
+    .prize #content {
+        width: 88%;
+        font-size: 12px;
+    }
+    .share_txt,
+    .prize_txt {
+        font-size: 12px;
+    }
+    .game_rule_content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 500px;
+        width: 360px;
+        margin-top: -250px;
+        margin-left: -180px;
+        border-radius: 10px;
+        background: #fff url(../img/tip_bg.png) left bottom no-repeat;
+        background-size: 221px 134px;
+        overflow: auto;
+    }
+    .over #content{
+        padding: 20px 10px 10px 10px;
+    }
+    .phone .phone_content{
+        width: 68%;
+    }
 }
