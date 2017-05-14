@@ -23,7 +23,7 @@ var over = {
           return;
         }
 
-        $over.on('touchstart', '.again_btn', function() {
+        $over.on('touchstart click', '.again_btn', function() {
             if (self.curIncome >= 10) {
                 // _gaq.push(['_trackEvent', 'game', 'again', 'game>10%', 1, true]);
             } else {
@@ -33,7 +33,7 @@ var over = {
             self.closeAlert();
         });
 
-        $over.on('touchstart', '.other_btn', function() {
+        $over.on('touchstart click', '.other_btn', function() {
             if (self.curIncome >= 10) {
                 //领红包
                 // _gaq.push(['_trackEvent', 'game', 'hongbao', ' game>10%', 1, true]);
@@ -41,73 +41,88 @@ var over = {
             } else {
                 //直播
                 // _gaq.push(['_trackEvent', 'game', 'chat_yy', ' game<10%', 1, true]);
-                window.location.href = "http://pmchat.24k.hk/studio";
+                window.location.href = "https://chat.gwfx.com";
             }
             // this.$store.commit('commitIncome', 0);
             return false;
         });
 
-        $over.on('touchstart', '.share', function() {
+        $over.on('touchstart click', '.share', function() {
             self.showShare();
         });
 
         //手机号提交
-        $phone.on('touchstart', '.phone_submit', function () {
-            var url = 'http://testgwactivity.24k.hk:8098/unify-activity/activity/earnmoney/lottery',
+        $phone.on('touchstart click', '.phone_submit', function () {
+                var url = 'https://gwactivity.gwfx.com/unify-activity/activity/earnmoney/lottery',
                 //url = '/api/yx/activity/earnmoney/lottery',
-                url = './activity/earnmoney/lottery',
+               // url = '/unify-activity/activity/earnmoney/lottery',
                 phone = $.trim($('.phone_form .phone_num').val()),
                 captcha = $.trim($('.phone_form .code_num').val()),
                 status = '3',
-                post = {activityPeriods:over.activityPeriods, status:status, phone:phone, captcha:captcha};
-            $.post(url, post, function(res){
-                if(res.ok && res.data.prize){
-                    var type = res.data.prizeCode == 'CASH5YUAN' ? 1 : 2;
-                    localStorage.setItem('phone', phone);
-                    over.showPrize(type);
-                }
-            });
+                curIncome = parseFloat(self.curIncome).toFixed(2);
+                post = {activityPeriods:over.activityPeriods, status:status, phone:phone, captcha:captcha,yield:curIncome,companyId:"2"};
+				$.ajax({
+					type:"POST",
+					url: url,
+					dataType:"jsonp",
+					jsonp:"callback",
+					data:post,
+					success:function(msg){
+						if("0"==msg["code"]){
+							 var type = msg["data"].prizeCode == 'CASH5YUAN' ? 1 : 2;
+							localStorage.setItem('phone', phone);
+							over.showPrize(type);
+						}
+					}
+				});
             return false;
         });
 
         // 发送验证码
-        $phone.on('touchstart', '.code_btn', function () {
-            var url = 'http://testgwactivity.24k.hk:8098/unify-activity/activity/sms/vericode',
+        $phone.on('touchstart click', '.code_btn', function () {
+            var url = 'https://gwactivity.gwfx.com/unify-activity/activity/sms/vericode',
                 // url = '/api/yx/activity/sms/vericode',
-                url = './activity/sms/vericode',
+                //url = '/unify-activity/activity/sms/vericode',
                 phone = $.trim($('.phone_form .phone_num').val());
             if(phone == '' || $('.code_btn').attr('data-send') == '1'){
                 return false;
             }
 
             $('.code_btn').attr('data-send', '1');
-            $.post(url, {mobile:phone}, function(res){
-                if(res.ok){
-                    var timeDiff = 60,
-                        sendCodeInterval = setInterval(function(){
-                            if(timeDiff < 1){
-                                $('.code_btn').html('验证码').css('background', '#5697fd');
-                                clearInterval(sendCodeInterval);
-                                $('.code_btn').attr('data-send', '0');
-                            }else{
-                                $('.code_btn').html('已发送('+timeDiff+'s)').css('background','#666');
-                                timeDiff--;
-                            }
-                        }, 1000);
-                }else{
-                    $('.code_btn').attr('data-send', '0');
-                }
-            });
+			$.ajax({
+				type:"POST",
+				url: url,
+				dataType:"jsonp",
+				jsonp:"callback",
+				data:{mobile:phone, companyId:"2"},
+				success:function(msg){
+					if("0"==msg["code"]){
+						var timeDiff = 60,
+						sendCodeInterval = setInterval(function(){
+							if(timeDiff < 1){
+								$('.code_btn').html('验证码').css('background', '#5697fd');
+								clearInterval(sendCodeInterval);
+								$('.code_btn').attr('data-send', '0');
+							}else{
+								$('.code_btn').html('已发送('+timeDiff+'s)').css('background','#666');
+								timeDiff--;
+							}
+						}, 1000);
+					}else{
+							$('.code_btn').attr('data-send', '0');
+					}
+				}
+			});
             return false;
         });
 
         //关闭手机号提交
-        $phone.on('touchstart', '.close_phone', function () {
+        $phone.on('touchstart click', '.close_phone', function () {
           self.closePhone();
         });
 
         //关闭获奖
-        $prize.on('touchstart', '.close_prize', function () {
+        $prize.on('touchstart click', '.close_prize', function () {
           self.closePrize();
         });
 
@@ -137,15 +152,24 @@ var over = {
             self.showHistory = true;
             if (localStorage.getItem('phone')) {
                 //var url = '/api/yx/activity/earnmoney/maxYield',
-                var url = './activity/earnmoney/maxYield',
+                var url = 'https://gwactivity.gwfx.com/unify-activity/activity/earnmoney/maxYield',
                     phone = localStorage.getItem('phone'),
-                    post = {activityPeriods: over.activityPeriods, phone:phone};
-                $.post(url, post, function(res){
-                    if(res.ok){
-                        self.history = res.data.maxYield;
-                        self.showAlert();
-                    }
-                });
+                    post = {activityPeriods: over.activityPeriods, phone:phone, companyId:"2"};
+				$.ajax({
+					type:"POST",
+					url: url,
+					dataType:"jsonp",
+					jsonp:"callback",
+					data:post,
+					success:function(msg){
+						if("0"==msg["code"]){
+							self.history = msg["data"].maxYield;
+							self.showAlert();
+						}else{
+								$('.code_btn').attr('data-send', '0');
+						}
+					}
+				});
             } else {
                 //使用本地
                 self.history = parseFloat(localStorage.getItem('income'));
@@ -209,12 +233,14 @@ var over = {
     },
     showShare: function () {
       var self = this;
-      var html = '<div id="content"> <div class="close_share"></div> <img src="./img/share_img.png" alt=""> <span class="share_txt"> 长按上方图片保存到您的手机相册中。请打开微信将该<br>图片发送给好友，或者分享朋友圈，即分享成功啦！ </span> </div>';
+      var text = navigator.userAgent.indexOf('MicroMessenger') !== -1 ? '请点击右上角，分享给好友或分享到朋友圈' : '长按上方图片保存到您的手机相册中。请打开微信将该<br>图片发送给好友，或者分享朋友圈，即分享成功啦！ ';
+      var html = '<div id="content"> <div class="close_share"></div> <img src="./img/share_img.png" alt=""> <span class="share_txt">'+text+'</span> </div>';
 
       $('.shareto').append(html).removeClass('hidden');
       if (localStorage.getItem("times") && localStorage.getItem("times") > 3) {
         localStorage.setItem("times", 3);
       }
+      localStorage.setItem("totalTimes", parseInt(localStorage.getItem("totalTimes")) + 1);
       // _gaq.push(['_trackEvent', 'game', 'share', ' share_wechat', 1, true]);
       // this.addShare();
     },
@@ -225,12 +251,13 @@ var over = {
     },
     addShare: function() {
       var phone = localStorage.getItem('phone') || '';
-      axios.post('./activity/earnmoney/addShareCount', {
+      axios.post('https://gwactivity.gwfx.com/unify-activity/activity/earnmoney/addShareCount', {
         activityPeriods: '20170411',
-        phone: phone
-      }).then((res) => {
-
-      }).catch((res) => {
+        phone: phone,
+		companyId:'2'
+      }).then(function(res){
+		console.log(res);
+      }).catch(function(res) {
         console.log(res);
       })
     },

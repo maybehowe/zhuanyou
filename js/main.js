@@ -34,53 +34,53 @@ var game = {
             // e.stopPropagation()
         });
 
-        $('.game_rule').on('touchstart', function() {
+        $('.game_rule').on('touchstart click', function() {
             self.showGameRule();
         });
 
-        $('.game_share').on('touchstart', function () {
+        $('.game_share').on('touchstart click', function () {
             over.showShare();
         })
 
-        $('.rule_close').on('touchstart', function() {
+        $('.rule_close').on('touchstart click', function() {
             self.hideGameRule();
         });
 
-        $('.game_begin_btn').on('touchstart', function() {
+        $('.game_begin_btn').on('touchstart click', function() {
             $(this).removeClass('btn');
             self.beginGame();
         });
 
-        $('.game_close').on('touchstart', function() {
+        $('.game_close').on('touchstart click', function() {
             self.closeGame();
         });
 
-        $('.getin_btn').on('touchstart', function() {
+        $('.getin_btn').on('touchstart click', function() {
             if (!$(this).hasClass('unable')) {
                 self.getIn();
             }
         });
 
-        $('.getout_btn').on('touchstart', function() {
+        $('.getout_btn').on('touchstart click', function() {
             if (!$(this).hasClass('unable')) {
                 self.getOut();
             }
         });
 
-        $('.goon_btn').on('touchstart', function() {
+        $('.goon_btn').on('touchstart click', function() {
             self.operationSelf();
         });
 
-        $over.on('touchstart', '.err_cancel', function() {
+        $over.on('touchstart click', '.err_cancel', function() {
 
           over.closeShowErr();
         });
-        $over.on('touchstart', '.err_share_btn', function() {
+        $over.on('touchstart click', '.err_share_btn', function() {
           over.closeShowErr();
           over.showShare();
         });
 
-        $share.on('touchstart', '.close_share', function() {
+        $share.on('touchstart click', '.close_share', function() {
 
           over.closeShare();
         })
@@ -142,7 +142,7 @@ var game = {
         self.income = 0.0;
         self.isTrain = true;
     },
-    //买入
+    //买涨
     getIn: function() {
         var self = this;
         // _gaq.push(['_trackEvent', 'game', 'get_in', 'content2', 1, true]);
@@ -179,7 +179,7 @@ var game = {
             self.startCount();
         }
     },
-    //卖出
+    //买跌
     getOut: function() {
         var self = this;
         // _gaq.push(['_trackEvent', 'game', 'get_out', 'content2', 1, true]);
@@ -215,7 +215,7 @@ var game = {
             self.startCount();
         }
     },
-    //买入按钮动
+    //买涨按钮动
     enableGetin: function(calm) {
         var self = this;
         $('.getin_btn').removeClass('unable');
@@ -227,7 +227,7 @@ var game = {
         var self = this;
         $('.getin_btn').addClass('unable');
     },
-    //卖出按钮动
+    //买跌按钮动
     enableGetout: function(calm) {
         var self = this;
         $('.getout_btn').removeClass('unable');
@@ -248,8 +248,8 @@ var game = {
     alertTip: function(type) {
         var self = this;
         var html = '';
-        var buy = "<span style='color:#ff5c66;font-weight:bold;'>“买入”</span>",
-            sell = "<span style='color:#ff5c66;font-weight:bold;'>“卖空”</span>";
+        var buy = "<span style='color:#ff5c66;font-weight:bold;'>“买涨”</span>",
+            sell = "<span style='color:#ff5c66;font-weight:bold;'>“买跌”</span>";
         if (type == '1') {
             html = "上涨动能强劲，预计上涨趋势延续，此时" + buy + "，将有机会盈利";
         } else if (type == '2') {
@@ -330,8 +330,8 @@ var game = {
                     localStorage.setItem('income', self.income);
                 }
                 //Todo 为了出现注册
-                // over.init(20);
-                over.init(self.income);
+                over.init(20);
+                // over.init(self.income);
 
             } else if (self.index == 6) {
                 clearInterval(self.counteId);
@@ -366,7 +366,7 @@ var game = {
                 self.counteId = null;
                 self.alertTip("continue");
             }
-        }, 1300)
+        }, 10)
     },
     operationSelf() {
         var self = this;
