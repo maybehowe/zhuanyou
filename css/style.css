@@ -450,6 +450,10 @@ table th {
     margin-bottom: 12px;
     color: #545454;
 }
+.paiming{
+    max-width: 170px;
+    line-height: 18px;
+}
 
 .red {
     color: #f8525c;

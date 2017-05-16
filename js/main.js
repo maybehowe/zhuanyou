@@ -34,53 +34,53 @@ var game = {
             // e.stopPropagation()
         });
 
-        $('.game_rule').on('touchstart click', function() {
+        $('.game_rule').on('click', function() {
             self.showGameRule();
         });
 
-        $('.game_share').on('touchstart click', function () {
+        $('.game_share').on('click', function () {
             over.showShare();
         })
 
-        $('.rule_close').on('touchstart click', function() {
+        $('.rule_close').on('click', function() {
             self.hideGameRule();
         });
 
-        $('.game_begin_btn').on('touchstart click', function() {
+        $('.game_begin_btn').on('click', function() {
             $(this).removeClass('btn');
             self.beginGame();
         });
 
-        $('.game_close').on('touchstart click', function() {
+        $('.game_close').on('click', function() {
             self.closeGame();
         });
 
-        $('.getin_btn').on('touchstart click', function() {
+        $('.getin_btn').on('click', function() {
             if (!$(this).hasClass('unable')) {
                 self.getIn();
             }
         });
 
-        $('.getout_btn').on('touchstart click', function() {
+        $('.getout_btn').on('click', function() {
             if (!$(this).hasClass('unable')) {
                 self.getOut();
             }
         });
 
-        $('.goon_btn').on('touchstart click', function() {
+        $('.goon_btn').on('click', function() {
             self.operationSelf();
         });
 
-        $over.on('touchstart click', '.err_cancel', function() {
+        $over.on('click', '.err_cancel', function() {
 
           over.closeShowErr();
         });
-        $over.on('touchstart click', '.err_share_btn', function() {
+        $over.on('click', '.err_share_btn', function() {
           over.closeShowErr();
           over.showShare();
         });
 
-        $share.on('touchstart click', '.close_share', function() {
+        $share.on('click', '.close_share', function() {
 
           over.closeShare();
         })
@@ -366,7 +366,7 @@ var game = {
                 self.counteId = null;
                 self.alertTip("continue");
             }
-        }, 1300)
+        }, 100)
     },
     operationSelf() {
         var self = this;
