@@ -708,6 +708,661 @@ table th {
     top: 45.4%;
 }
 
+.coin {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  right: 30%;
+  top: 25%;
+  z-index: 4;
+}
+
+.coin img{
+  position: absolute;
+  top: -10px;
+  opacity: 0;
+}
+
+.coin1{
+  left: 10px;
+  animation: coin1 .8s ease;
+}
+.mobile .coin1{
+    width: 10px;
+    left:5px;
+    animation: mcoin1 .8s ease;
+}
+
+@keyframes coin1{
+  0%{
+    left: 10px;
+    top:-10px;
+    opacity: 0;
+  }
+
+  40%{
+    top: 200px;
+    opacity: 1;
+  }
+
+  50%{
+    top: 180px;
+    opacity: 1;
+  }
+
+  60%{
+    top: 190px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+@keyframes mcoin1{
+  0%{
+    left: 5px;
+    top:-5px;
+    opacity: 0;
+  }
+
+  40%{
+    top: 100px;
+    opacity: 1;
+  }
+
+  50%{
+    top: 90px;
+    opacity: 1;
+  }
+
+  60%{
+    top: 95px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+.coin2{
+  left: 30px;
+  animation: coin2 .8s ease;
+}
+
+.mobile .coin2{
+    width: 12px;
+    left:15px;
+    animation: mcoin2 .8s ease;
+}
+
+@keyframes coin2{
+  0%{
+    left: 30px;
+    top:-10px;
+    opacity: 0;
+  }
+
+  40%{
+    left: 30px;
+    top: 250px;
+    opacity: 1;
+  }
+
+  50%{
+    left: 30px;
+    top: 220px;
+    opacity: 1;
+  }
+
+  70%{
+    left: 30px;
+    top: 240px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+@keyframes coin2{
+  0%{
+    left: 15px;
+    top:-5px;
+    opacity: 0;
+  }
+
+  40%{
+    left: 15px;
+    top: 175px;
+    opacity: 1;
+  }
+
+  50%{
+    left: 15px;
+    top: 110px;
+    opacity: 1;
+  }
+
+  70%{
+    left: 15px;
+    top: 120px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+.coin3{
+  left: 60px;
+  animation: coin3 .8s ease;
+}
+
+.mobile .coin3{
+    width: 23px;
+    left:30px;
+    animation: mcoin3 .8s ease;
+}
+
+@keyframes coin3{
+  0%{
+    left: 60px;
+    top:-10px;
+    opacity: 0;
+  }
+
+  40%{
+    left: 60px;
+    top: 280px;
+    opacity: 1;
+  }
+
+  50%{
+    left: 60px;
+    top: 260px;
+    opacity: 1;
+  }
+
+  70%{
+    left: 60px;
+    top: 280px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+@keyframes mcoin3{
+  0%{
+    left: 30px;
+    top:-5px;
+    opacity: 0;
+  }
+
+  40%{
+    left: 30px;
+    top: 140px;
+    opacity: 1;
+  }
+
+  50%{
+    left: 30px;
+    top: 130px;
+    opacity: 1;
+  }
+
+  70%{
+    left: 30px;
+    top: 140px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+.coin4{
+  left: 110px;
+  animation: coin4 .8s ease;
+}
+.mobile .coin4{
+    width: 10px;
+    left:55px;
+    animation: mcoin4 .8s ease;
+}
+@keyframes coin4{
+  0%{
+    left: 110px;
+    top:-10px;
+    opacity: 0;
+  }
+
+  40%{
+    left: 110px;
+    top: 190px;
+    opacity: 1;
+  }
+
+  50%{
+    left: 110px;
+    top: 160px;
+    opacity: 1;
+  }
+
+  70%{
+    left: 110px;
+    top: 190px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+@keyframes mcoin4{
+  0%{
+    left: 55px;
+    top:-5px;
+    opacity: 0;
+  }
+
+  40%{
+    left: 55px;
+    top: 95px;
+    opacity: 1;
+  }
+
+  50%{
+    left: 55px;
+    top: 80px;
+    opacity: 1;
+  }
+
+  70%{
+    left: 55px;
+    top: 95px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+.coin5{
+  left: 130px;
+  animation: coin5 .8s ease;
+}
+.mobile .coin5{
+    width: 17px;
+    left:65px;
+    animation: mcoin5 .8s ease;
+}
+@keyframes coin5{
+  0%{
+    left: 130px;
+    top:-10px;
+    opacity: 0;
+  }
+
+  50%{
+    left: 130px;
+    top: 210px;
+    opacity: 1;
+  }
+
+  60%{
+    left: 130px;
+    top: 200px;
+    opacity: 1;
+  }
+
+  80%{
+    left: 130px;
+    top: 210px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+@keyframes mcoin5{
+  0%{
+    left: 65px;
+    top:-5px;
+    opacity: 0;
+  }
+
+  50%{
+    left: 65px;
+    top: 105px;
+    opacity: 1;
+  }
+
+  60%{
+    left: 65px;
+    top: 100px;
+    opacity: 1;
+  }
+
+  80%{
+    left: 65px;
+    top: 105px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+.coin6{
+  left: 170px;
+  animation: coin6 .8s ease;
+}
+.mobile .coin6{
+    width: 15px;
+    left:85px;
+    animation: mcoin6 .8s ease;
+}
+
+@keyframes coin6{
+  0%{
+    left: 170px;
+    top:-10px;
+    opacity: 0;
+  }
+
+  30%{
+    left: 170px;
+    top: 280px;
+    opacity: 1;
+  }
+
+  40%{
+    left: 170px;
+    top: 260px;
+    opacity: 1;
+  }
+
+  60%{
+    left: 170px;
+    top: 280px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+@keyframes mcoin6{
+  0%{
+    left: 85px;
+    top:-5px;
+    opacity: 0;
+  }
+
+  30%{
+    left: 85px;
+    top: 140px;
+    opacity: 1;
+  }
+
+  40%{
+    left: 85px;
+    top: 130px;
+    opacity: 1;
+  }
+
+  60%{
+    left: 85px;
+    top: 140px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+.coin7{
+  left: 200px;
+  animation: coin7 .8s ease;
+}
+.mobile .coin7{
+    width: 19px;
+    left:100px;
+    animation: mcoin7 .8s ease;
+}
+@keyframes coin7{
+  0%{
+    left: 200px;
+    top:-10px;
+    opacity: 0;
+  }
+
+  50%{
+    left: 200px;
+    top: 160px;
+    opacity: 1;
+  }
+
+  60%{
+    left: 200px;
+    top: 140px;
+    opacity: 1;
+  }
+
+  80%{
+    left: 200px;
+    top: 160px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+@keyframes mcoin7{
+  0%{
+    left: 100px;
+    top:-5px;
+    opacity: 0;
+  }
+
+  50%{
+    left: 100px;
+    top: 80px;
+    opacity: 1;
+  }
+
+  60%{
+    left: 100px;
+    top: 70px;
+    opacity: 1;
+  }
+
+  80%{
+    left: 100px;
+    top: 80px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+.coin8{
+  left: 230px;
+  animation: coin8 .8s ease;
+}
+.mobile .coin8{
+    width: 12px;
+    left:115px;
+    animation: mcoin8 .8s ease;
+}
+@keyframes coin8{
+  0%{
+    left: 230px;
+    top:-10px;
+    opacity: 0;
+  }
+
+  60%{
+    left: 230px;
+    top: 210px;
+    opacity: 1;
+  }
+
+  70%{
+    left: 230px;
+    top: 180px;
+    opacity: 1;
+  }
+
+  80%{
+    left: 230px;
+    top: 210px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+@keyframes mcoin8{
+  0%{
+    left: 115px;
+    top:-5px;
+    opacity: 0;
+  }
+
+  60%{
+    left: 115px;
+    top: 105px;
+    opacity: 1;
+  }
+
+  70%{
+    left: 115px;
+    top: 90px;
+    opacity: 1;
+  }
+
+  80%{
+    left: 115px;
+    top: 105px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+.coin9{
+  left: 260px;
+  animation: coin9 .8s ease;
+}
+.mobile .coin9{
+    width: 22px;
+    left:130px;
+    animation: mcoin9 .8s ease;
+}
+@keyframes coin9{
+  0%{
+    left: 260px;
+    top:-10px;
+    opacity: 0;
+  }
+
+  40%{
+    left: 260px;
+    top: 250px;
+    opacity: 1;
+  }
+
+  60%{
+    left: 260px;
+    top: 220px;
+    opacity: 1;
+  }
+
+  80%{
+    left: 260px;
+    top: 250px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+@keyframes mcoin9{
+  0%{
+    left: 130px;
+    top:-5px;
+    opacity: 0;
+  }
+
+  40%{
+    left: 130px;
+    top: 120px;
+    opacity: 1;
+  }
+
+  60%{
+    left: 130px;
+    top: 110px;
+    opacity: 1;
+  }
+
+  80%{
+    left: 130px;
+    top: 125px;
+    opacity: 1;
+  }
+
+  100%{
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+  }
+}
+
 .hidden {
     display: none;
 }
@@ -1259,3 +1914,11 @@ table th {
 .pc .err_ctrl_btn{display:none;}
 
 .rule_close.err_cancel{background:url(../img/rule_close.png) center center no-repeat;}
+.pc .coin {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  right: 38%;
+  top: 30%;
+  z-index: 4;
+}

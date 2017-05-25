@@ -103,9 +103,8 @@
         <div class="over hidden"></div>
         <div class="phone hidden"></div>
         <div class="shareto hidden"></div>
-        <div class="prize hidden">
-
-        </div>
+        <div class="prize hidden"></div>
+        <div class="coin"></div>
     </div>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="./js/lib/fastclick.js"></script>
@@ -116,6 +115,8 @@
     $(document).ready(function(){
         if (!(/mobile/i.test(navigator.userAgent))) {
             $('#main_body').addClass('pc');
+        }else{
+            $('#main_body').addClass('mobile');
         }
         $('#main_body').show();
     });

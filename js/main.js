@@ -15,7 +15,6 @@ var game = {
     counteId: null,
     index: 0,
     asset: 100000.0,
-    coinShow: false,
     shengyu: kdata.length,
     buyPrice: 0,
     hand: 0,
@@ -145,7 +144,6 @@ var game = {
         self.tradeMode = 0;
         self.counteId = null;
         self.asset = 100000.0;
-        self.coinShow = false;
         self.buyPrice = 0;
         self.hand = 0;
         self.income = 0.0;
@@ -171,6 +169,7 @@ var game = {
             self.asset = parseFloat(self.asset + inmoney);
             self.tradeMode = 0;
             self.enableGetout();
+            self.showCoin();
 
             // this.coinShow = true;
             // setTimeout(() => {
@@ -207,6 +206,7 @@ var game = {
             self.asset = parseFloat(self.asset + inmoney);
             self.tradeMode = 0;
             self.enableGetin();
+            self.showCoin();
 
             // this.coinShow = true;
             // setTimeout(() => {
@@ -251,7 +251,12 @@ var game = {
     //显示收益硬币
     showCoin: function() {
         var self = this;
+        var html = '<img class="coin1" src="./img/coin1.png"><img class="coin2" src="./img/coin2.png"><img class="coin3" src="./img/coin3.png"><img class="coin4" src="./img/coin4.png"><img class="coin5" src="./img/coin5.png"><img class="coin6" src="./img/coin6.png"><img class="coin7" src="./img/coin7.png"><img class="coin8" src="./img/coin8.png"><img class="coin9" src="./img/coin9.png">';
 
+        $('.coin').html(html);
+        setTimeout(function () {
+          $('.coin').html('');
+        },10000)
     },
     //弹提示框
     alertTip: function(type) {
