@@ -38,9 +38,10 @@ var game = {
             self.showGameRule();
         });
 
-        $('.game_share').on('click', function () {
+        $('body').on('click', '.wx_game_share', function () {
             over.showShare();
-        })
+            return false;
+        });
 
         $('.rule_close').on('click', function() {
             self.hideGameRule();
@@ -51,8 +52,10 @@ var game = {
             self.beginGame();
         });
 
-        $('.game_close').on('click', function() {
+        $('body').on('click', '.game_close', function() {
             self.closeGame();
+            $('.over').html('');
+            $('.over').addClass('hidden');
         });
 
         $('.getin_btn').on('click', function() {
@@ -83,11 +86,17 @@ var game = {
         $share.on('click', '.close_share', function() {
 
           over.closeShare();
-        })
+        });
+
+        $share.on('click', '.pc_share a', function() {
+            if($(this).attr('href') != '#'){
+                over.incrementTotalTimes();
+            }
+        });
     },
     //显示游戏规则
     showGameRule: function() {
-        var rule_html = '<div class="item"> <h3 style="color:#f00; text-align:center;">活动规则</h3> </div> <div class="item"> <span>活动时间:</span>待定 </div> <div class="item"> <span>参与条件:</span>所有客户 （现有客户可参与游戏，但不获得对应奖励） </div> <div class="item"> <span>交易有效期:</span>30个自然日 </div> <table> <tr> <th>奖励标准</th> <th>奖励</th> <th>获奖须知</th> </tr> <tr> <td>收益率10%以下</td> <td>加入培训课程机会</td> <td>--</td> </tr> <tr> <td>收益率10%以上</td> <td>微信红包</td> <td>添加专属客户经理</td> </tr> </table> <div class="item"> <span>规则说明:</span> <p>1. 每一个注册新用户ID仅能参与领取一次奖金，不能重复领取。</p> <p>2. 赚钱小游戏奖励只适用于金道贵金属的新注册用户，且从未属开立过真实交易账户的用户。在活动期间收益率在15%以上需添加专属客户经理的微信，在致电核实身份后进行发放。</p> <p>3. 每个用户每天最多只能参与三局游戏机会，当参与机会达到上限时通过分享一次即可增加 “再挑战一次机会”的参与机会。</p> <p>4. 当游戏结束之后,领奖方式按当前游戏收益率为领奖依据。</p> <p>5. 赚钱小游戏中的现有客户即可参与，老用户不享有此游戏红包奖励，但有获得直播间VIP特权一个月体验机会（可累计叠加）。</p> <p>6. 金道贵金属保留随时修订、暂停、终止本活动及任何相关规则条款之权利及其解释权。</p> <p>7. 红包每天限量500份</p> <p>8. 一经发现任何违规套取返利的行为，将不予返利、追回相关余额或者封停账号，且依法追究其法律责任。</p> </div>';
+        var rule_html = '<div class="item"> <h3 style="color:#f00; text-align:center;">活动规则</h3> </div> <div class="item"> <span>活动时间:</span>待定 </div> <div class="item"> <span>参与条件:</span>所有客户 （现有客户可参与游戏，但不获得对应奖励） </div> <div class="item"> <span>交易有效期:</span>30个自然日 </div> <table> <tr> <th>奖励标准</th> <th>奖励</th> <th>获奖须知</th> </tr> <tr> <td>收益率10%以下</td> <td>加入培训课程机会</td> <td>--</td> </tr> <tr> <td>收益率10%以上</td> <td>微信红包</td> <td>添加老师微信号</td> </tr> </table> <div class="item"> <span>规则说明:</span> <p>1. 每一个注册新用户ID仅能参与领取一次奖金，不能重复领取。</p> <p>2. 赚钱小游戏奖励只适用于金道贵金属的新注册用户，且从未属开立过真实交易账户的用户。在活动期间收益率在15%以上需添加老师微信号，在致电核实身份后进行发放。</p> <p>3. 每个用户每天最多只能参与三局游戏机会，当参与机会达到上限时通过分享一次即可增加 “再挑战一次机会”的参与机会。</p> <p>4. 当游戏结束之后,领奖方式按当前游戏收益率为领奖依据。</p> <p>5. 赚钱小游戏中的现有客户即可参与，老用户不享有此游戏红包奖励，但有获得在线线教育大厅特权一个月体验机会（可累计叠加）。</p> <p>6. 金道贵金属保留随时修订、暂停、终止本活动及任何相关规则条款之权利及其解释权。</p> <p>7. 红包每天限量500份</p> <p>8. 一经发现任何违规套取返利的行为，将不予返利、追回相关余额或者封停账号，且依法追究其法律责任。</p> </div>';
 
         $('.game_rule_content_in').html(rule_html);
         $('.game_rule_wrap').show();
@@ -366,9 +375,9 @@ var game = {
                 self.counteId = null;
                 self.alertTip("continue");
             }
-        }, 100)
+        }, 100);
     },
-    operationSelf() {
+    operationSelf: function() {
         var self = this;
         self.startCount();
         self.closeTip();
@@ -376,7 +385,7 @@ var game = {
         self.buyPrice = 0;
         self.asset = 100000.0;
         self.tradeMode = 0;
-        self.income = 0.0;
+        //self.income = 0.0;
         self.enableGetin(true);
         self.enableGetout(true);
         // _gaq.push(['_trackEvent', 'game', 'continue', 'content', 1, true]);

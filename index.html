@@ -10,11 +10,12 @@
     <meta name="keywords" content="">
     <link rel="stylesheet" href="./css/base.css" media="all">
     <link rel="stylesheet" href="./css/common.css" media="all">
-    <link rel="stylesheet" href="./css/style.css?v=1.2" media="all">
+    <link rel="stylesheet" href="./css/style.css?v=1.2.3" media="all">
 
 </head>
 
 <body>
+    <img src="./img/main_bg.png" style="position: absolute; top:0; left:0; z-index: -1; width: 100%; height: 100%;"/>
     <div id="main_body" class="main">
         <div class="game_begin">
             <div class="logo">
@@ -29,7 +30,13 @@
             <div class="landscape_tip">
                 <div class="content">横屏体验更好哦</div>
             </div>
-            <div class="game_share">游戏分享</div>
+            <div class="game_share wx_game_share">游戏分享</div>
+            <div class="pc_game_share">游戏分享:
+                <a href="#" class="wx_game_share"><img src="./img/wx.png" /></a>
+                <a href="http://v.t.sina.com.cn/share/share.php?url=http://www.24k.hk&title=我在金道投资玩游戏，赚了不少呢，快来一起和我比比谁的收益率高吧！" target="_blank"><img src="./img/sina.png" /></a>
+                <a href="http://connect.qq.com/widget/shareqq/index.html?title=金道贵金属交易&url=http://www.24k.hk&desc=我在金道投资玩游戏，赚了不少呢，快来一起和我比比谁的收益率高吧！" target="_blank"><img src="./img/qq.png" /></a>
+                <a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.24k.hk&desc=我在金道投资玩游戏，赚了不少呢，快来一起和我比比谁的收益率高吧！&title=金道投资" target="_blank"><img src="./img/kongjian.png" /></a>
+            </div>
             <div class="game_rule_wrap">
                 <div class="game_rule_content">
                     <div class="game_rule_content_in"></div>
@@ -100,15 +107,18 @@
 
         </div>
     </div>
-    <script type="application/javascript" src="./js/lib/zepto.js"></script>
-    <script type="application/javascript" src="./js/lib/fastclick.js"></script>
-    <script type="application/javascript" src="./js/main.js?v=1.2"></script>
-    <script type="application/javascript" src="./js/over.js?v=1.2.0"></script>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/lib/fastclick.js"></script>
+    <script type="text/javascript" src="./js/main.js?v=1.2.5"></script>
+    <script type="text/javascript" src="./js/over.js?v=1.2.5"></script>
+    <script type="text/javascript" src="./js/debug.js?v=1.2.3"></script>
     <script type="text/javascript">
+    $(document).ready(function(){
         if (!(/mobile/i.test(navigator.userAgent))) {
             $('#main_body').addClass('pc');
         }
         $('#main_body').show();
+    });
     </script>
 </body>
  <!--#include file="/common/template/lp/lp_analytics_container.html"-->

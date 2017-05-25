@@ -32,6 +32,11 @@ var over = {
             game.replayGame();
             self.closeAlert();
         });
+        $over.on('click', '.pc_game_share a', function(){
+            if($(this).attr('href') != '#'){
+               self.incrementTotalTimes();
+            }
+        });
 
         $over.on('click', '.other_btn', function() {
             if (self.curIncome >= 10) {
@@ -47,12 +52,14 @@ var over = {
             return false;
         });
 
-        $over.on('click', '.share', function() {
+        $over.on('click', '.wx_share', function() {
             self.showShare();
+            return false;
         });
 
         //手机号提交
         $phone.on('click', '.phone_submit', function() {
+            $('.result-msg').html('');
             var url = 'https://gwactivity.gwfx.com/unify-activity/activity/earnmoney/lottery',
                 //url = '/api/yx/activity/earnmoney/lottery',
                 // url = '/unify-activity/activity/earnmoney/lottery',
@@ -69,9 +76,12 @@ var over = {
                 data: post,
                 success: function(msg) {
                     if ("0" == msg["code"]) {
-                        var type = msg["data"].prizeCode == 'CASH5YUAN' ? 1 : 2;
+                        //var type = msg["data"].prizeCode == 'CASH5YUAN' ? 2 : 1;
+                        var type = 0;
                         localStorage.setItem('phone', phone);
                         over.showPrize(type);
+                    }else{
+                        $('.result-msg').html(msg["msg"]);
                     }
                 }
             });
@@ -142,7 +152,7 @@ var over = {
             self.redAlert = false;
         } else {
             self.redAlert = true;
-            self.buttonMsg = '去直播间课堂';
+            self.buttonMsg = '去学交易课堂';
         }
 
         if (!localStorage.getItem('times') || localStorage.getItem('times') == "1") {
@@ -163,7 +173,7 @@ var over = {
                     data: post,
                     success: function(msg) {
                         if ("0" == msg["code"]) {
-                            self.history = msg["data"].maxYield;
+                            self.history = JSON.parse(msg["data"]).maxYield;
                             self.showAlert();
                         } else {
                             $('.code_btn').attr('data-send', '0');
@@ -183,6 +193,7 @@ var over = {
         var curIncome = self.curIncome;
         var win = null;
         var paiming = '';
+        /*
         if (curIncome <= 0) {
             //不显示
             paiming = '<span class="paiming">Sorry，您在全国用户排名不高，再试试手气吧！</span>';
@@ -193,10 +204,17 @@ var over = {
             win = parseFloat((curIncome - 15) * 0.65 + 60).toFixed(2);
             paiming = '<span class="paiming">您打败了<b id="win">' + win + '</b>%的用户</span>';
         }
+        */
+        if (curIncome < 1) {
+            paiming = '<span class="paiming">很遗憾您未获得排名，收益率在10%以上可获得奖励噢~</span>';
+        } else {
+            win = parseFloat((curIncome - 15) * 0.45 + 60).toFixed(2);
+            paiming = '<span class="paiming">您打败了<b id="win">' + win + '</b>%的用户</span>';
+        }
         var income = parseFloat(curIncome).toFixed(2),
             history = parseFloat(self.history).toFixed(2);
 
-        var html = '<div id="content"> <div class="item"> <span>当天排名</span> ' + paiming + ' </div> <div class="item"> <span>收益率</span> <span class="red"><b id="income">' + income + '</b>%</span> </div>';
+        var html = '<div id="content"> <div class="game_close"></div><div class="item"> <span>当天排名</span> ' + paiming + ' </div> <div class="item"> <span>收益率</span> <span class="red"><b id="income">' + income + '</b>%</span> </div>';
 
         if (self.redAlert) {
             html += '<p class="redAlert">收益达到10%以上，有机会获得微信红包呦</p>';
@@ -206,7 +224,7 @@ var over = {
             html += '<div class="item showHistory"><span>历史最高收益率</span><span class="red"><b id="history_income">' + history + '</b>%</span></div>';
         }
 
-        html += ' <div class="opt"><div class="alert_btn again_btn">再挑战一次</div><div class="alert_btn other_btn">' + self.buttonMsg + '</div></div><div class="share">分享好友</div></div>';
+        html += ' <div class="opt"><div class="alert_btn again_btn">再挑战一次</div><div class="alert_btn other_btn">' + self.buttonMsg + '</div></div><div class="share wx_share">分享好友</div> <div class="pc_share">游戏分享: <a href="#" class="wx_game_share wx_share"><img src="./img/wx.png" /></a> <a href="http://v.t.sina.com.cn/share/share.php?url=http://www.24k.hk&title=我在金道投资玩游戏，赚了不少呢，快来一起和我比比谁的收益率高吧！" target="_blank"><img src="./img/sina.png" /></a> <a href="http://connect.qq.com/widget/shareqq/index.html?title=金道贵金属交易&url=http://www.24k.hk&desc=我在金道投资玩游戏，赚了不少呢，快来一起和我比比谁的收益率高吧！" target="_blank"><img src="./img/qq.png" /></a> <a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.24k.hk&desc=我在金道投资玩游戏，赚了不少呢，快来一起和我比比谁的收益率高吧！&title=金道投资" target="_blank"><img src="./img/kongjian.png" /></a> </div> </div>';
 
         $('.over').append(html).removeClass('hidden');
     },
@@ -217,7 +235,7 @@ var over = {
     },
     showPhone: function() {
         var self = this;
-        var html = '<div class="phone_content"> <div class="close_phone"></div> <div class="phone_form"> <div class="phone_form_item"> <input class="phone_num" type="text" name="mobile" maxlength="11" placeholder="请输入手机号码"> </div> <div class="phone_form_item"> <input class="code_num" type="text" name="captcha" maxlength="6" placeholder="请输入验证码"> <div class="code_btn">验证码</div> </div> </div> <div class="phone_submit">提交</div> </div>';
+        var html = '<div class="phone_content"> <div class="close_phone"></div> <div class="phone_form"> <div class="phone_form_item"> <input class="phone_num" type="text" name="mobile" maxlength="11" placeholder="请输入手机号码"> </div> <div class="phone_form_item"> <input class="code_num" type="text" name="captcha" maxlength="6" placeholder="请输入验证码"> <div class="code_btn">验证码</div> </div> <div class="result-msg" style="color:red;"></div></div> <div class="phone_submit">提交</div> </div>';
 
         $('.phone').append(html).removeClass('hidden');
     },
@@ -228,7 +246,7 @@ var over = {
     },
     showErr: function() {
         var self = this;
-        var html = '<div id="content" class="err_wrap"> <div class="err_txt"> Sorry，您的游戏次数已经用完，但只要您点<br>击分享，即可以再次获得一次游戏机会哟 </div> <div class="err_ctrl"> <div class="err_ctrl_btn err_share_btn">分享好友</div> <div class="err_ctrl_btn err_cancel">取消</div> </div> </div>';
+        var html = '<div id="content" class="err_wrap"> <div class="rule_close err_cancel"></div>  <div class="err_txt"> Sorry，您的游戏次数已经用完，但只要您点<br>击分享，即可以再次获得一次游戏机会哟 </div> <div class="err_ctrl"> <div class="err_ctrl_btn err_share_btn">分享好友</div> <div class="err_ctrl_btn err_cancel">取消</div> </div> </div>';
 
         $('.over').append(html).removeClass('hidden');
     },
@@ -240,22 +258,34 @@ var over = {
     showShare: function() {
         var self = this;
         var text = navigator.userAgent.indexOf('MicroMessenger') !== -1 ? '请点击右上角，分享给好友或分享到朋友圈' : '长按上方图片保存到您的手机相册中。请打开微信将该<br>图片发送给好友，或者分享朋友圈，即分享成功啦！ ';
-        var html = '<div id="content"> <div class="close_share"></div> <img src="./img/share_img.png" alt=""> <span class="share_txt">' + text + '</span> </div>';
+        var shareImg = '';
+        if($('.pc').length > 0){
+            text = '打开微信，点击底部的“发现”，使用 “扫一扫” 即可将网页分享到我的朋友圈。';
+            shareImg = '_pc';
+        }
+        var html = '<div id="content"> <div class="close_share"></div> <img src="./img/share_img'+shareImg+'.png?v=1.0" alt=""> <span class="share_txt">' + text + '</span> </div>';
 
         $('.shareto').append(html).removeClass('hidden');
+        self.incrementTotalTimes();
+        // _gaq.push(['_trackEvent', 'game', 'share', ' share_wechat', 1, true]);
+        // this.addShare();
+    },
+    incrementTotalTimes: function(){
+        alert('aaa');
         if (localStorage.getItem("times") && localStorage.getItem("times") > 3) {
             localStorage.setItem("times", 3);
         }
         localStorage.setItem("totalTimes", parseInt(localStorage.getItem("totalTimes")) + 1);
-        // _gaq.push(['_trackEvent', 'game', 'share', ' share_wechat', 1, true]);
-        // this.addShare();
     },
     closeShare: function() {
         var self = this;
         $('.shareto').html('');
         $('.shareto').addClass('hidden');
+        self.closeAlert();
+        $('.game_close').click();
     },
     addShare: function() {
+        /*
         var phone = localStorage.getItem('phone') || '';
         axios.post('https://gwactivity.gwfx.com/unify-activity/activity/earnmoney/addShareCount', {
             activityPeriods: '20170411',
@@ -266,12 +296,16 @@ var over = {
         }).catch(function(res) {
             console.log(res);
         })
+        */
     },
     showPrize: function(type) {
         var self = this;
         self.closePhone();
         var text = navigator.userAgent.indexOf('MicroMessenger') !== -1 ? '长按二维码图片，选择识别二维码' : '点击保存此图片，然后打开微信，点击右上角，扫一扫，从相册中选 <br>取该图片';
-        var html = '<div id="content"> <div class="close_prize"></div> <img src="./img/prize_img_' + type + '.png" alt=""> <div class="prize_txt">' + text + '，即可以添加老师的微信。老师审核后将会把奖品发给您。 </div> </div>';
+        if($('.pc').length > 0){
+            text = '用微信扫描上面的二维码';
+        }
+        var html = '<div id="content"> <div class="close_prize"></div> <img src="./img/prize_img_' + type + '.png?v=1.0" alt=""> <div class="prize_txt">' + text + '，即可以添加老师的微信。老师审核后将会把奖品发给您。 </div> </div>';
 
         $('.prize').append(html).removeClass('hidden');
     },
@@ -279,5 +313,7 @@ var over = {
         var self = this;
         $('.prize').html('');
         $('.prize').addClass('hidden');
+        self.closeAlert();
+        $('.game_close').click();
     }
 }

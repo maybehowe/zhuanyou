@@ -34,7 +34,7 @@ body {
 */
 @media all and (orientation: portrait) {
     body {
-        background-color: red;
+        background-color: '#FF675C';
     }
     .landscape_tip {
         display: block;
@@ -434,6 +434,7 @@ table th {
 }
 
 .over #content {
+    position: relative;
     background: #fff;
     font-size: 14px;
     -ms-flex-item-align: center;
@@ -1239,3 +1240,22 @@ table th {
     right: -25px;
     background-size: cover;
 }
+
+.over .game_close{top:-15px;}
+.pc .game_share{display:none;}
+.pc_game_share{display:none;}
+.pc_game_share a, .pc_share a{display:inline;}
+.pc .pc_game_share, .pc .pc_share{    position: absolute;
+    display:block;
+    bottom: 20px;
+    right: 20px;
+    color: #a78c6f;
+    font-size: 22px;}
+.pc .share{display:none;}
+.pc_share{display:none;}
+.pc .pc_share{display:block;bottom: 5px;
+    font-size: 18px;
+}
+.pc .err_ctrl_btn{display:none;}
+
+.rule_close.err_cancel{background:url(../img/rule_close.png) center center no-repeat;}
